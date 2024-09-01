@@ -4,9 +4,9 @@ import {
     getContactWithID, 
     updateContact,
     deleteContact 
-} from '../controllers/crmController';
+} from '../controllers/crmController.js';
 
-const routes = (app) => {
+export const routes = (app) => {
     app.route('/contact')
     .get((req, res, next) => {
         // middleware
