@@ -13,6 +13,7 @@
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "helmet": "^7.1.0",
     "mongoose": "^8.4.1",
     "validator": "^13.12.0"
   },
