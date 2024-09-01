@@ -9,15 +9,14 @@ export const addNewContact = (req, res) => {
 
   if (
     validator.isEmail(newContact.email) &&
-    !validator.isEmpty(newContact.firstName) &&
-    !validator.isEmpty(newContact.phone)
+    !validator.isEmpty(newContact.firstName)
   ) {
-    newContact.save((err, contact) => {
-      if (err) {
+    newContact
+      .save()
+      .then((contact) => res.json(contact))
+      .catch((err) => {
         res.send(err);
-      }
-      res.json(contact);
-    });
+      });
   }
 };
 
@@ -30,33 +29,27 @@ export const getContacts = (req, res) => {
 };
 
 export const getContactWithID = (req, res) => {
-  Contact.findById(req.params.contactId, (err, contact) => {
-    if (err) {
+  Contact.findById(req.params.contactId)
+    .then((contact) => res.json(contact))
+    .catch((err) => {
       res.send(err);
-    }
-    res.json(contact);
-  });
+    });
 };
 
 export const updateContact = (req, res) => {
-  Contact.findOneAndUpdate(
-    { _id: req.params.contactId },
-    req.body,
-    { new: true },
-    (err, contact) => {
-      if (err) {
-        res.send(err);
-      }
-      res.json(contact);
-    }
-  );
+  Contact.findOneAndUpdate({ _id: req.params.contactId }, req.body, {
+    new: true,
+  })
+    .then((contact) => res.json(contact))
+    .catch((err) => {
+      res.send(err);
+    });
 };
 
 export const deleteContact = (req, res) => {
-  Contact.remove({ _id: req.params.contactId }, (err, contact) => {
-    if (err) {
+  Contact.findByIdAndDelete(req.params.contactId)
+    .then(() => res.json({ message: "Successfully deleted contact" }))
+    .catch((err) => {
       res.send(err);
-    }
-    res.json({ message: "Successfully deleted contact" });
-  });
+    });
 };
