@@ -8,9 +8,7 @@ const PORT = 3000;
 
 // mongoose connection
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/CRMdb', {
-    useMongoClient: true
-});
+mongoose.connect('mongodb://mongo:27017/docker-node-mongo');
 
 // bodyparser setup
 app.use(bodyParser.urlencoded({ extended: true }));
