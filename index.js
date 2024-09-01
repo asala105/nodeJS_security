@@ -1,6 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import bodyParser from 'body-parser';
+import helmet from 'helmet';
 import routes from './src/routes/crmRoutes.js';
 
 const app = express();
@@ -9,6 +10,8 @@ const PORT = 3000;
 // mongoose connection
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://mongo:27017/docker-node-mongo');
+
+app.use(helmet())
 
 // bodyparser setup
 app.use(bodyParser.urlencoded({ extended: true }));
